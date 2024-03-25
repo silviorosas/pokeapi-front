@@ -5,7 +5,7 @@
         <div class="card" (click)="openModal(pokemon.name)" data-bs-toggle="modal" data-bs-target="#pokemonModal">
           <img class="card-img-top" [src]="pokemon.photo" alt="{{ pokemon.name }}">
           <div class="card-body">
-            <h5 class="card-title">{{ pokemon.name }}</h5>
+            <h5 class="card-title"  style="color: blue">{{ pokemon.name | uppercase}}</h5>
             <p><strong>Tipo:</strong> {{ pokemon.type }}</p>
             <p><strong>Peso:</strong> {{ pokemon.weight }}</p>
             <p><strong>Habilidades:</strong></p>
