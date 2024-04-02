@@ -1,32 +1,60 @@
 <div class="container">
-    <h2 class="text-center mb-4">Lista de Pokémon</h2>
-    <div class="row">
-      <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4" *ngFor="let pokemon of pokemonList">
-        <div class="card" (click)="openModal(pokemon.name)" data-bs-toggle="modal" data-bs-target="#pokemonModal">
-          <img class="card-img-top" [src]="pokemon.photo" alt="{{ pokemon.name }}">
-          <div class="card-body">
-            <h5 class="card-title"  style="color: blue">{{ pokemon.name | uppercase}}</h5>
-            <p><strong>Tipo:</strong> {{ pokemon.type }}</p>
-            <p><strong>Peso:</strong> {{ pokemon.weight }}</p>
-            <p><strong>Habilidades:</strong></p>
-            <ul>
-              <li *ngFor="let ability of pokemon.abilities">{{ ability.ability.name }}</li>
-            </ul>
-          </div>
+  <h2 class="text-center mb-4">Lista de Pokémon</h2>
+  <!-- Spinner que se muestra mientras se carga la información -->
+  <div *ngIf="loading" class="spinner-container">
+    <div class="spinner-border" role="status">
+    <span class="visually-hidden"></span>
+  </div>
+</div>
+  <div class="row card-container">
+    <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4" *ngFor="let pokemon of pokemonList">
+      <div class="card" (click)="openModal(pokemon.name)" data-bs-toggle="modal" data-bs-target="#pokemonModal">
+        <img class="card-img-top" [src]="pokemon.photo" alt="{{ pokemon.name }}">
+        <div class="card-body">
+          <h5 class="card-title" style="color: rgb(98, 98, 245)">{{ pokemon.name | uppercase }}</h5>
+          <p><strong>Tipo:</strong> {{ pokemon.type }}</p>
+          <p><strong>Peso:</strong> {{ pokemon.weight }}</p>
+          <p><strong>Habilidades:</strong></p>
+          <ul>
+            <li *ngFor="let ability of pokemon.abilities">{{ ability.ability.name }}</li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
+  <div class="footer">
+    <div class="container text-center mt-3">
+      <button class="btn btn-primary mx-2" (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+      <span>Página {{ currentPage }} de {{ totalPages }}</span>
+      <button class="btn btn-primary mx-2" (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
+    </div>
+  </div>
   
-  <div class="modal fade" id="pokemonModal" tabindex="-1" aria-labelledby="pokemonModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="pokemonModalLabel">{{ selectedPokemon?.name }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+</div>
+
+<div class="modal fade" id="pokemonModal" tabindex="-1" aria-labelledby="pokemonModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pokemonModalLabel">{{ selectedPokemon?.name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+      </div>
+      <!-- Contenido del modal -->
+      <div class="modal-body">
+        <!-- Mostrar spinner mientras se carga la información o mensaje de error -->
+        <div *ngIf="loading || showErrorModal" class="text-center">
+          <div class="spinner-border" role="status" *ngIf="loading">
+            <span class="visually-hidden"></span>
+          </div>
+          <div class="alert alert-danger" role="alert" *ngIf="showErrorModal">
+            <img src="assets/pokemon.png" alt="error, foto de pokemon de advertencia" class="img-fluid mb-3">
+            Error: {{ errorMessage }}
+          </div>
         </div>
-        <div class="modal-body">
-          <img [src]="selectedPokemon?.photo" alt="{{ selectedPokemon?.name }}" class="img-fluid mb-3">
+        <!-- Mostrar imagen del Pokémon -->
+        <img [src]="selectedPokemon?.photo" alt="{{ selectedPokemon?.name }}" class="img-fluid mb-3" *ngIf="selectedPokemon && !showErrorModal">
+        <!-- Mostrar detalles del Pokémon solo si no hay error -->
+        <div *ngIf="selectedPokemon && !showErrorModal">
           <p><strong>Tipo:</strong> {{ selectedPokemon?.type }}</p>
           <p><strong>Peso:</strong> {{ selectedPokemon?.weight }}</p>
           <p><strong>Habilidades:</strong></p>
@@ -42,4 +70,6 @@
       </div>
     </div>
   </div>
-  
+</div>
+
+

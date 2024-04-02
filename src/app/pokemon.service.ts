@@ -18,4 +18,10 @@ export class PokemonService {
   getPokemonDetails(name: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/data/${name}`);
   }
+
+
+  getPokemonPage(page: number, pageSize: number): Observable<any> {
+    const url = `${this.baseUrl}?page=${page}&pageSize=${pageSize}`;
+    return this.http.get(url);
+  }
 }

@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+/* Estilo para el fondo oscuro y texto claro */
+body {
+    background-color: #1e1e1e; /* Fondo oscuro */
+    color: #ffffff; /* Texto claro */
+  }
+  
+  /* Estilo para el contenedor principal */
+  .container {
+    padding: 20px; /* Espacio alrededor del contenido */
+    margin: auto; /* Centrar el contenedor */
+    max-width: 1200px; /* Ancho máximo del contenedor */
+   
+  }
+  
+  /* Estilo para la lista de Pokémon */
+  .card {
+    background-color: #2c2c2c; /* Fondo oscuro para las tarjetas */
+    color: #ffffff; /* Texto claro */
+    border: none; /* Sin borde */
+    border-radius: 10px; /* Bordes redondeados */
+  }
+  
+  .card-title {
+    color: #bdcbe0; /* Color del título */
+  }
+  
+  /* Estilo para los botones de paginación */
+  .btn-primary {
+    background-color: #4287f5; /* Color de fondo del botón */
+    border-color: #4287f5; /* Color del borde del botón */
+    color: #ffffff; /* Texto claro */
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Color de fondo del botón al pasar el mouse */
+    border-color: #0056b3; /* Color del borde del botón al pasar el mouse */
+  }
+  
+  /* Estilo para el modal */
+  .modal-content {
+    background-color: #2c2c2c; /* Fondo oscuro para el modal */
+    color: #ffffff; /* Texto claro */
+  }
+  
+  /* Estilo para el título del modal */
+  .modal-title {
+    color: #4287f5; /* Color del título del modal */
+  }
+  
